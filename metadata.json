@@ -1,0 +1,6 @@
+{
+  "name": "Proplis",
+  "description": "Real estate agent CRM platform allowing agents to launch private storefronts (proplis.com/name) with Starter Free, Growth, and Agency Elite tiers, featuring AI Polish, video tours, and booking engine embeds.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

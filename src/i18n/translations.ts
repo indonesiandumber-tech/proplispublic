@@ -1,0 +1,617 @@
+import { Language, AgentPlanTier, ServiceType, PropertyCategory } from '../types';
+
+export interface PlanTranslation {
+  name: string;
+  tagline: string;
+  priceFormatted: string;
+  billingPeriod: string;
+  listingLimitLabel: string;
+  listingLimit: number;
+  allowWhatsApp: boolean;
+  allowTrackingTags: boolean;
+  allowVideoPerListing: boolean;
+  maxVideosPerListing?: number;
+  allowRotatingListings: boolean;
+  allowOwnerListingSubmission: boolean;
+  ownerIntakeMode?: 'none' | 'light' | 'complete';
+  allowAIAssistant?: boolean;
+  allowBookingEngineEmbed?: boolean;
+  isPopular?: boolean;
+  badge?: string;
+  features: { title: string; included: boolean; note?: string }[];
+}
+
+export const TRANSLATIONS = {
+  id: {
+    // Top Bar & Header
+    topStripAnnouncement: 'CRM Agen & Website Pribadi',
+    topStripSubtitle: '3 Paket: Starter Free (2 listing), Growth (Rp 99.000), Agency Elite Unlimited (Rp 249.000)',
+    viewPlansPricing: 'Lihat 3 Paket & Harga',
+    createPrivateWeb: '+ Buat Website Pribadi',
+    agentPlatform: 'Platform & Harga Agen',
+    allPropertyListings: 'Katalog Semua Properti',
+    agentCrmPortal: 'Portal CRM Agen',
+    createAgentWeb: 'Buat Website Agen',
+    selectCurrency: 'Pilih Mata Uang',
+    selectLanguage: 'Pilih Bahasa',
+    currentAgentProfile: 'Profil Agen Aktif',
+    guestUser: 'Pengguna Tamu',
+    demoMode: 'Mode Demo',
+    switchAgent: 'Ganti Profil Agen',
+    savedWishlist: 'Properti Tersimpan',
+    myBookings: 'Jadwal & Reservasi',
+    logoutGuest: 'Beralih ke Pengguna Tamu',
+    agentPrivateWebsite: 'Website Pribadi Agen',
+    rotatingHeroBadge: 'Listing Unggulan Bergerak',
+    viewDetails: 'Lihat Detail',
+    forRent: 'Sewa',
+    forSale: 'Jual',
+    forLease: 'Sewa Panjang',
+    all: 'Semua',
+    ratingAndTrust: 'Rating & Kepercayaan',
+    activePropertyListings: 'Listing Properti Aktif',
+    whatsappLeadIntegration: 'Integrasi Prospek WhatsApp',
+    ownerListingIntake: 'Intake Titip Listing Pemilik',
+    listYourProperty: 'Titip Listing (Pemilik)',
+    whatsappChat: 'Chat WhatsApp',
+    directMessage: 'Pesan In-App',
+    emailInquiry: 'Kirim Email',
+    aboutAgent: 'Tentang Agen',
+    clientReviews: 'Ulasan Klien',
+    reviews: 'ulasan',
+    activeTrackingPixels: 'Tag Pelacak Iklan Aktif',
+    addNewListing: 'Tambah Listing Baru',
+    agentCrmAccountRequired: 'Akun CRM Agen Diperlukan',
+    copyUrl: 'Salin URL',
+    qrCode: 'QR Code',
+    close: 'Tutup',
+    cancel: 'Batal',
+
+    // Agent Storefront Filters & Districts
+    filterByDistrict: 'Distrik / Lokasi',
+    allDistricts: 'Semua Distrik',
+    selectDistrict: 'Pilih Distrik / Area',
+    popularDistricts: 'Distrik Populer',
+    filterByCategory: 'Tipe Properti',
+    allCategories: 'Semua Kategori',
+    filterByPurpose: 'Tujuan Listing',
+    allListingPurposes: 'Semua Status (Jual & Sewa)',
+    searchByKeyword: 'Cari nama properti, alamat, fitur...',
+    showingResults: 'Menampilkan',
+    propertiesCount: 'properti',
+    resetFilters: 'Reset Filter',
+    noPropertiesFound: 'Tidak ada properti yang cocok dengan filter yang dipilih.',
+    tryAdjustingFilters: 'Coba ubah pilihan distrik, kategori, atau status sewa/jual untuk melihat hasil lainnya.',
+    activeFiltersLabel: 'Filter Aktif:',
+    sortByPrice: 'Urutkan Harga',
+    priceLowToHigh: 'Harga: Termurah',
+    priceHighToLow: 'Harga: Tertinggi',
+    priceDefault: 'Rekomendasi',
+
+    // Click to Reveal Phone & Conversion Tracking
+    showPhoneNumber: 'Lihat Nomor HP',
+    clickToRevealPhone: 'Klik untuk Lihat Nomor HP',
+    copyPhoneNumber: 'Salin Nomor HP',
+    phoneCopied: 'Nomor HP Tersalin!',
+    callNow: 'Panggil Sekarang',
+    directCall: 'Telepon Langsung',
+    conversionTrackedNotice: 'Event Konversi Google & Facebook Tercatat',
+    
+    // Please List My Property Feature
+    pleaseListMyProperty: 'Titip Listing Properti Saya',
+    wantToListProperty: 'Punya Properti untuk Dijual atau Disewakan?',
+    wantToListPropertySub: 'Titipkan villa, rumah, tanah, atau ruko Anda langsung kepada agen resmi untuk dipasarkan ke ribuan calon pembeli dan penyewa.',
+    listPropertyFormTitle: 'Formulir Titip Listing Properti',
+    listPropertyFormSub: 'Kirim detail properti Anda langsung ke pipeline CRM agen terverifikasi',
+    ownerNameField: 'Nama Lengkap Pemilik',
+    ownerPhoneField: 'Nomor HP / WhatsApp',
+    ownerEmailField: 'Alamat Email',
+    propertyAddressField: 'Alamat & Lokasi Properti',
+    propertyDistrictField: 'Distrik / Kawasan (misal: Canggu, Ubud, Kuta, SCBD)',
+    propertyCityField: 'Kota / Provinsi',
+    propertyTypeField: 'Tipe Properti',
+    propertyDescriptionField: 'Deskripsi & Fasilitas Properti',
+    listingPurposeField: 'Tujuan Listing',
+    forSaleOption: 'Dijual (For Sale - Hak Milik / SHM / Hak Pakai)',
+    forRentOption: 'Disewakan (For Rent - Harian / Bulanan / Villa Liburan)',
+    forLeaseOption: 'Disewa Panjang (For Lease - Sewa Tahunan / Leasehold)',
+    expectedPriceField: 'Perkiraan Harga (IDR / USD)',
+    expectedPriceHint: 'Contoh: Rp 4.500.000.000 atau $300,000',
+    submitListingToAgent: 'Kirim Properti ke Agen',
+    submissionSuccessTitle: 'Properti Berhasil Dititipkan!',
+    submissionSuccessMessage: 'Terima kasih! Detail properti Anda telah masuk langsung ke CRM Agen. Agen akan segera menghubungi Anda melalui WhatsApp.',
+    chatWithAgentNow: 'Chat WhatsApp Agen Sekarang',
+
+    // Photos & Branding
+    brandingPhotosTitle: 'Foto Profil & Header Website',
+    brandingPhotosDesc: 'Ganti foto profil (avatar) dan foto sampul header website properti pribadi Anda. Dukung upload foto atau pilih foto resolusi tinggi pilihan.',
+    profileAvatar: 'Foto Profil Agen',
+    headerCover: 'Foto Header / Sampul Website',
+    changeProfilePhoto: 'Ganti Foto Profil',
+    changeHeaderCover: 'Ganti Foto Header',
+    uploadFromDevice: 'Unggah Foto dari Perangkat',
+    dragAndDropImage: 'Klik untuk pilih file atau seret foto ke sini (JPG, PNG, WebP)',
+    orPasteImageUrl: 'Atau Masukkan URL Foto Langsung',
+    selectFromPresets: 'Koleksi Foto Resolusi Tinggi Pilihan',
+    savePhotos: 'Simpan Perubahan Foto',
+    photoUpdatedSuccess: 'Foto berhasil diperbarui!',
+    resetDefaultPhoto: 'Gunakan Foto Default',
+
+    // Landing Page Hero
+    heroBadge: 'Dirancang Khusus untuk Agen Properti & Broker Independen',
+    heroTitleLine1: 'Hentikan Bikin Website dari Nol.',
+    heroTitleHighlight: 'Buat Portal Properti Pribadi Anda',
+    heroSubtitle: 'Dapatkan website personal di',
+    heroSubtitleEnd: 'dengan konversi prospek WhatsApp instan, pixel tracking iklan, dan sistem intake titip listing dari pemilik properti.',
+    heroInputPlaceholder: 'nama-anda-atau-kantor',
+    heroButtonClaim: 'Klaim Website & Pilih Paket',
+    heroNoCreditCard: 'Setup 60 detik • Tanpa coding • Siap jalankan iklan',
+
+    // Landing Features
+    featuresTitle: 'Fitur Utama untuk Agen Properti Modern',
+    featuresSubtitle: 'Semua alat yang dibutuhkan broker untuk meningkatkan penjualan dan mengotomatisasi listing properti.',
+    feat1Title: 'Website Pribadi proplis.com/nama-anda',
+    feat1Desc: 'Website profesional mobile-friendly dengan katalog sewa harian, jual beli hak milik, dan sewa jangka panjang.',
+    feat2Title: 'Konversi Prospek 1-Klik WhatsApp',
+    feat2Desc: 'Pengunjung website langsung terhubung ke WhatsApp Anda dengan teks otomatis sesuai properti yang sedang dilihat.',
+    feat3Title: 'Retargeting Pixel (FB, TikTok & Google)',
+    feat3Desc: 'Pasang Meta Pixel, TikTok Tag, dan Google Analytics langsung di website pribadi Anda untuk menjalankan iklan retargeting.',
+    feat4Title: 'Video Tour 3 Menit per Listing',
+    feat4Desc: 'Tampilkan video tour walkthrough untuk menarik pembeli dan penyewa premium.',
+    feat5Title: 'Spotlight Banner Hero Berputar (Pro)',
+    feat5Desc: 'Tampilkan listing unggulan bergerak di bagian atas website Anda secara otomatis.',
+    feat6Title: 'Sistem Intake "Titip Listing" Pemilik (Pro)',
+    feat6Desc: 'Tombol khusus pemilik properti untuk mengirimkan data villa/rumah/tanah langsung ke pipeline CRM Anda.',
+
+    // Pricing Section
+    pricingSectionBadge: 'Pilihan Paket Berlangganan',
+    pricingSectionTitle: 'Pilih Paket yang Sesuai dengan Skala Bisnis Anda',
+    pricingSectionSubtitle: 'Mulai gratis atau upgrade untuk membuka WhatsApp langsung, pixel tracking, dan listing tanpa batas.',
+    choosePlan: 'Pilih Paket Ini',
+    currentActivePlan: 'Paket Anda Saat Ini',
+    popularChoice: 'Paling Populer',
+    agencyChoice: 'Pilihan Agency & Top Broker',
+    freeForever: 'Gratis Selamanya',
+    perMonth: '/ bulan',
+
+    // Live Storefront Demos
+    demoSectionTitle: 'Lihat Contoh Website Agen yang Sedang Aktif',
+    demoSectionSubtitle: 'Klik agen di bawah untuk melihat live demo website mereka di Proplis.',
+    viewLiveWebsite: 'Lihat Website',
+    activeListingsCount: 'listing aktif',
+
+    // Modals & Forms
+    modalCreateTitle: 'Buat Website Agen Properti Anda',
+    modalCreateSubtitle: 'Klaim URL personal Anda dan pilih paket langganan untuk mulai menerima leads.',
+    modalUpgradeTitle: 'Tingkatkan Paket Langganan Agen',
+    modalUpgradeSubtitle: 'Buka fitur WhatsApp langsung, tracking pixel iklan, dan listing tanpa batas.',
+    modalOwnerTitle: 'Titip Jual atau Sewa Properti Anda',
+    modalOwnerSubtitle: 'Kirimkan data properti Anda kepada agen kami untuk mendapatkan penilaian dan promosi maksimal.',
+    formOwnerName: 'Nama Lengkap Anda *',
+    formOwnerPhone: 'Nomor WhatsApp *',
+    formOwnerEmail: 'Alamat Email *',
+    formPropTitle: 'Nama / Judul Properti *',
+    formServiceType: 'Tujuan Listing *',
+    formCategory: 'Tipe Properti *',
+    formCity: 'Kota *',
+    formArea: 'Area / Kawasan *',
+    formExpectedPrice: 'Ekspektasi Harga (Rp / USD) *',
+    formBedrooms: 'Jumlah Kamar Tidur',
+    formBathrooms: 'Jumlah Kamar Mandi',
+    formBuildingSize: 'Luas Bangunan (m²)',
+    formLandSize: 'Luas Tanah (m²)',
+    formDescription: 'Deskripsi Tambahan & Fasilitas',
+    submitOwnerPropBtn: 'Kirim Data Properti ke Agen',
+    submissionSuccess: 'Data properti berhasil dikirim! Agen kami akan segera menghubungi Anda via WhatsApp.',
+
+    // Footer
+    footerTagline: 'Platform website dan CRM properti modern yang memberdayakan agen, broker independen, dan pemilik properti.',
+    footerServices: 'Layanan Properti',
+    footerStorefronts: 'Website Agen Unggulan',
+    footerDestinations: 'Destinasi Utama',
+    footerRights: 'Hak cipta dilindungi undang-undang.',
+    privacyPolicy: 'Kebijakan Privasi',
+    termsOfService: 'Syarat & Ketentuan',
+    agentAgreement: 'Perjanjian Agen'
+  },
+
+  en: {
+    // Top Bar & Header
+    topStripAnnouncement: 'Agent CRM & Private Websites',
+    topStripSubtitle: '3 Plans: Starter Free (2 listings), Growth (Rp 99k), Agency Elite Unlimited (Rp 249k)',
+    viewPlansPricing: 'View 3 Plans & Pricing',
+    createPrivateWeb: '+ Create Private Web',
+    agentPlatform: 'Agent Platform & Pricing',
+    allPropertyListings: 'All Property Listings',
+    agentCrmPortal: 'Agent CRM Portal',
+    createAgentWeb: 'Create Agent Web',
+    selectCurrency: 'Select Currency',
+    selectLanguage: 'Select Language',
+    currentAgentProfile: 'Current Agent Profile',
+    guestUser: 'Guest User',
+    demoMode: 'Demo Mode',
+    switchAgent: 'Switch Agent Profile',
+    savedWishlist: 'Saved Wishlist',
+    myBookings: 'Bookings & Tours',
+    logoutGuest: 'Switch to Guest User',
+    agentPrivateWebsite: 'Agent Private Website',
+    rotatingHeroBadge: 'Featured Showcase (Auto-Rotating)',
+    viewDetails: 'View Details',
+    forRent: 'For Rent',
+    forSale: 'For Sale',
+    forLease: 'For Lease',
+    all: 'All',
+    ratingAndTrust: 'Rating & Trust',
+    activePropertyListings: 'Active Property Listings',
+    whatsappLeadIntegration: 'WhatsApp Lead Conversion',
+    ownerListingIntake: 'Owner Listing Intake',
+    listYourProperty: 'List Your Property',
+    whatsappChat: 'WhatsApp Chat',
+    directMessage: 'In-App Direct Message',
+    emailInquiry: 'Email Inquiry',
+    aboutAgent: 'About Agent',
+    clientReviews: 'Client Reviews',
+    reviews: 'reviews',
+    activeTrackingPixels: 'Active Ad Tracking Pixels',
+    addNewListing: 'Add New Listing',
+    agentCrmAccountRequired: 'Agent CRM Account Required',
+    copyUrl: 'Copy URL',
+    qrCode: 'QR Code',
+    close: 'Close',
+    cancel: 'Cancel',
+
+    // Agent Storefront Filters & Districts
+    filterByDistrict: 'District / Area',
+    allDistricts: 'All Districts',
+    selectDistrict: 'Select District / Area',
+    popularDistricts: 'Popular Districts',
+    filterByCategory: 'Property Type',
+    allCategories: 'All Categories',
+    filterByPurpose: 'Listing Purpose',
+    allListingPurposes: 'All Statuses (For Sale & Rent)',
+    searchByKeyword: 'Search title, address, features...',
+    showingResults: 'Showing',
+    propertiesCount: 'properties',
+    resetFilters: 'Reset Filters',
+    noPropertiesFound: 'No properties match your selected filters.',
+    tryAdjustingFilters: 'Try adjusting the district, category, or sale/rent status to see more results.',
+    activeFiltersLabel: 'Active Filters:',
+    sortByPrice: 'Sort Price',
+    priceLowToHigh: 'Price: Low to High',
+    priceHighToLow: 'Price: High to Low',
+    priceDefault: 'Recommended',
+
+    // Click to Reveal Phone & Conversion Tracking
+    showPhoneNumber: 'Show Phone Number',
+    clickToRevealPhone: 'Click to View Phone Number',
+    copyPhoneNumber: 'Copy Phone Number',
+    phoneCopied: 'Phone Number Copied!',
+    callNow: 'Call Now',
+    directCall: 'Direct Call',
+    conversionTrackedNotice: 'Google & Facebook Conversion Event Tracked',
+    
+    // Please List My Property Feature
+    pleaseListMyProperty: 'Please List My Property',
+    wantToListProperty: 'Want to Sell or Rent Out Your Property?',
+    wantToListPropertySub: 'List your villa, house, land, or commercial unit directly with this verified agent to reach thousands of serious buyers & tenants.',
+    listPropertyFormTitle: 'List Your Property Form',
+    listPropertyFormSub: 'Submit your property details directly to the agent\'s verified CRM pipeline',
+    ownerNameField: 'Property Owner Full Name',
+    ownerPhoneField: 'Phone / WhatsApp Number',
+    ownerEmailField: 'Email Address',
+    propertyAddressField: 'Property Address & Location',
+    propertyDistrictField: 'District / Area (e.g. Canggu, Ubud, Kuta, SCBD)',
+    propertyCityField: 'City / Province',
+    propertyTypeField: 'Property Type',
+    propertyDescriptionField: 'Property Description & Features',
+    listingPurposeField: 'Listing Purpose',
+    forSaleOption: 'For Sale (Freehold / SHM / Leasehold Purchase)',
+    forRentOption: 'For Rent (Daily / Weekly / Vacation Rental)',
+    forLeaseOption: 'For Lease (Yearly Long-Term Leasehold)',
+    expectedPriceField: 'Expected Price (IDR / USD)',
+    expectedPriceHint: 'e.g. Rp 4.500.000.000 or $300,000',
+    submitListingToAgent: 'Submit Property to Agent',
+    submissionSuccessTitle: 'Property Submitted Successfully!',
+    submissionSuccessMessage: 'Thank you! Your property details have been delivered directly to the agent\'s CRM pipeline. The agent will contact you shortly on WhatsApp.',
+    chatWithAgentNow: 'Chat with Agent on WhatsApp Now',
+
+    // Photos & Branding
+    brandingPhotosTitle: 'Profile & Website Header Photos',
+    brandingPhotosDesc: 'Update your agent profile picture (avatar) and personal storefront cover banner. Upload directly from your device, paste an image link, or pick from curated luxury presets.',
+    profileAvatar: 'Agent Profile Photo',
+    headerCover: 'Website Header Cover Photo',
+    changeProfilePhoto: 'Change Profile Photo',
+    changeHeaderCover: 'Change Header Photo',
+    uploadFromDevice: 'Upload Photo from Device',
+    dragAndDropImage: 'Click to select or drag & drop photo here (JPG, PNG, WebP)',
+    orPasteImageUrl: 'Or Enter Direct Image URL',
+    selectFromPresets: 'Curated High-Resolution Photo Library',
+    savePhotos: 'Save Photo Changes',
+    photoUpdatedSuccess: 'Photos updated successfully!',
+    resetDefaultPhoto: 'Reset to Default',
+
+    // Landing Page Hero
+    heroBadge: 'Built Specifically for Real Estate Agents & Property Brokers',
+    heroTitleLine1: 'Stop Building Websites From Scratch.',
+    heroTitleHighlight: 'Create Your Private Real Estate Portal',
+    heroSubtitle: 'Get your own personalized website at',
+    heroSubtitleEnd: 'with instant WhatsApp lead generation, marketing pixel tracking, and an automated owner property intake engine.',
+    heroInputPlaceholder: 'your-name-or-agency',
+    heroButtonClaim: 'Claim Website & Choose Plan',
+    heroNoCreditCard: '60-second setup • No coding required • Ad-ready',
+
+    // Landing Features
+    featuresTitle: 'Core Capabilities for Modern Real Estate Agents',
+    featuresSubtitle: 'Everything real estate brokers need to scale deals and automate property listings.',
+    feat1Title: 'Personal Website proplis.com/your-name',
+    feat1Desc: 'Professional mobile-friendly website showcasing vacation rentals, freehold sales, and commercial leases.',
+    feat2Title: '1-Click WhatsApp Lead Funnel',
+    feat2Desc: 'Storefront visitors connect directly to your WhatsApp with pre-filled inquiry text for the specific property.',
+    feat3Title: 'Retargeting Pixels (FB, TikTok & Google)',
+    feat3Desc: 'Embed Meta Pixel, TikTok Tag, and Google Analytics directly into your website to run retargeting ads.',
+    feat4Title: '3-Minute Video Tour per Listing',
+    feat4Desc: 'Embed rich video walkthroughs to attract high-intent buyers and premium tenants.',
+    feat5Title: 'Rotating Spotlight Hero Banner (Pro)',
+    feat5Desc: 'Showcase rotating featured luxury properties at the top of your private website automatically.',
+    feat6Title: 'Owner Property Intake Pipeline (Pro)',
+    feat6Desc: 'Dedicated "List Your Property" button allowing property owners to submit listings directly into your CRM.',
+
+    // Pricing Section
+    pricingSectionBadge: 'Subscription Plans',
+    pricingSectionTitle: 'Choose the Right Plan to Scale Your Business',
+    pricingSectionSubtitle: 'Start free or upgrade to unlock direct WhatsApp links, marketing tracking pixels, and unlimited listings.',
+    choosePlan: 'Choose This Plan',
+    currentActivePlan: 'Your Current Plan',
+    popularChoice: 'Most Popular',
+    agencyChoice: 'Top Agent & Agency Choice',
+    freeForever: 'Free Forever',
+    perMonth: '/ month',
+
+    // Live Storefront Demos
+    demoSectionTitle: 'Explore Live Active Agent Websites',
+    demoSectionSubtitle: 'Click any agent below to preview their live branded website on Proplis.',
+    viewLiveWebsite: 'View Website',
+    activeListingsCount: 'active listings',
+
+    // Modals & Forms
+    modalCreateTitle: 'Create Your Agent Website',
+    modalCreateSubtitle: 'Claim your personal URL and choose a plan to start capturing high-intent leads.',
+    modalUpgradeTitle: 'Upgrade Your Agent Plan',
+    modalUpgradeSubtitle: 'Unlock direct WhatsApp links, marketing pixel tags, and unlimited property listings.',
+    modalOwnerTitle: 'List Your Property With Us',
+    modalOwnerSubtitle: 'Submit your property details to our certified agent for valuation and high-impact marketing.',
+    formOwnerName: 'Your Full Name *',
+    formOwnerPhone: 'WhatsApp Number *',
+    formOwnerEmail: 'Email Address *',
+    formPropTitle: 'Property Title / Name *',
+    formServiceType: 'Listing Goal *',
+    formCategory: 'Property Type *',
+    formCity: 'City *',
+    formArea: 'Area / Neighborhood *',
+    formExpectedPrice: 'Expected Price (IDR / USD) *',
+    formBedrooms: 'Number of Bedrooms',
+    formBathrooms: 'Number of Bathrooms',
+    formBuildingSize: 'Building Size (m²)',
+    formLandSize: 'Land Size (m²)',
+    formDescription: 'Additional Description & Features',
+    submitOwnerPropBtn: 'Submit Property to Agent',
+    submissionSuccess: 'Property submitted successfully! Our agent will contact you via WhatsApp shortly.',
+
+    // Footer
+    footerTagline: 'The modern property marketplace and agent CRM empowering brokers, hosts, and property owners.',
+    footerServices: 'Real Estate Services',
+    footerStorefronts: 'Featured Agent Storefronts',
+    footerDestinations: 'Prime Destinations',
+    footerRights: 'All rights reserved.',
+    privacyPolicy: 'Privacy Policy',
+    termsOfService: 'Terms of Service',
+    agentAgreement: 'Agent Agreement'
+  }
+};
+
+export function getLocalizedPlans(lang: Language): Record<AgentPlanTier, PlanTranslation> {
+  if (lang === 'en') {
+    const starterPlan: PlanTranslation = {
+      name: 'Starter (Free)',
+      tagline: 'For new agents testing the platform & launching their instant storefront',
+      priceFormatted: 'Free / $0',
+      billingPeriod: 'Free Forever',
+      listingLimitLabel: '2 Active Listings',
+      listingLimit: 2,
+      allowWhatsApp: false,
+      allowTrackingTags: false,
+      allowVideoPerListing: false,
+      maxVideosPerListing: 0,
+      allowRotatingListings: false,
+      allowOwnerListingSubmission: false,
+      ownerIntakeMode: 'none',
+      allowAIAssistant: false,
+      allowBookingEngineEmbed: false,
+      isPopular: false,
+      features: [
+        { title: '2 Active Property Listings', included: true },
+        { title: 'Instant Vanity Website: proplis.com/your-name', included: true },
+        { title: 'Mobile & Desktop Responsive Storefront', included: true },
+        { title: 'Catalogs: Rent, Sale & Lease', included: true },
+        { title: 'Inquiries: Direct In-App CRM Inbox messages only', included: true },
+        { title: 'Privacy Controls: Phone & WhatsApp hidden from public view', included: true },
+        { title: 'Standard Photo Galleries', included: true },
+        { title: '❌ No Video Tours', included: false, note: 'Exclusive to Agency Elite' },
+        { title: '❌ No Tracking Pixels (Meta/TikTok/Google)', included: false },
+        { title: '❌ No AI Assistant Copywriting', included: false }
+      ]
+    };
+
+    const growthPlan: PlanTranslation = {
+      name: 'Growth',
+      tagline: 'For solo agents scaling their local listings and running paid ad campaigns',
+      priceFormatted: 'Rp 99,000 / $6.50',
+      billingPeriod: '/ month',
+      listingLimitLabel: 'Up to 20 Listings',
+      listingLimit: 20,
+      allowWhatsApp: true,
+      allowTrackingTags: true,
+      allowVideoPerListing: false,
+      maxVideosPerListing: 0,
+      allowRotatingListings: false,
+      allowOwnerListingSubmission: true,
+      ownerIntakeMode: 'light',
+      allowAIAssistant: true,
+      allowBookingEngineEmbed: false,
+      isPopular: true,
+      badge: 'Most Popular',
+      features: [
+        { title: 'Up to 20 Active Property Listings', included: true },
+        { title: 'All features in Starter (Free)', included: true },
+        { title: 'Direct Lead Capture: Public phone shown + 1-Click Direct WhatsApp buttons', included: true },
+        { title: 'Meta Pixel Tag Integration (Facebook & Instagram Ads)', included: true },
+        { title: 'TikTok Pixel Tag Integration', included: true },
+        { title: 'Google Tag / GA4 Analytics Integration', included: true },
+        { title: 'Lead Analytics Dashboard: Total visitor traffic & WhatsApp lead tracking', included: true },
+        { title: 'Bilingual AI Assistant: Automated AI descriptions & AI Polish', included: true },
+        { title: 'Owner Intake (Light): Quick form (Phone, 1 Photo, Short Description)', included: true },
+        { title: '❌ No Video Tours / Embeds (Exclusive to Agency Elite)', included: false, note: 'Exclusive to Agency Elite' }
+      ]
+    };
+
+    const elitePlan: PlanTranslation = {
+      name: 'Agency Elite',
+      tagline: 'For agencies, brokers, and high-volume teams wanting maximum presentation & automation',
+      priceFormatted: 'Rp 249,000 / $16',
+      billingPeriod: '/ month',
+      listingLimitLabel: 'Unlimited Listings (No Cap)',
+      listingLimit: 999999,
+      allowWhatsApp: true,
+      allowTrackingTags: true,
+      allowVideoPerListing: true,
+      maxVideosPerListing: 3,
+      allowRotatingListings: true,
+      allowOwnerListingSubmission: true,
+      ownerIntakeMode: 'complete',
+      allowAIAssistant: true,
+      allowBookingEngineEmbed: true,
+      badge: 'Agency & Top Team Choice',
+      features: [
+        { title: 'UNLIMITED Active Property Listings (No Cap)', included: true },
+        { title: 'All features in Growth Plan', included: true },
+        { title: '🎥 Video Tour Embeds: Up to 3 Video Tours per listing (YouTube, Vimeo, TikTok, Reels)', included: true },
+        { title: '🏨 Rental Booking Engine Embeds: SiteMinder, Book and Link, Cloudbeds direct widget', included: true },
+        { title: 'Complete Automated Owner Onboarding (Step-by-step wizard & gallery upload)', included: true },
+        { title: 'Digital Commission Agreement Signing with integrated digital signature', included: true },
+        { title: 'Instant Deal Routing: 1-click WhatsApp connection for owners & buyers', included: true },
+        { title: 'Priority Agency Analytics: Deep listing engagement & team lead stats', included: true },
+        { title: 'Rotating Spotlight Hero Banner Showcase', included: true }
+      ]
+    };
+
+    return {
+      starter: starterPlan,
+      growth: growthPlan,
+      elite: elitePlan,
+      free: starterPlan,
+      pro: elitePlan
+    };
+  }
+
+  // Indonesian localization
+  const starterPlanId: PlanTranslation = {
+    name: 'Starter (Free)',
+    tagline: 'Untuk agen baru yang menguji platform & meluncurkan website instan',
+    priceFormatted: 'Rp 0',
+    billingPeriod: 'Selamanya Gratis',
+    listingLimitLabel: '2 Listing Aktif',
+    listingLimit: 2,
+    allowWhatsApp: false,
+    allowTrackingTags: false,
+    allowVideoPerListing: false,
+    maxVideosPerListing: 0,
+    allowRotatingListings: false,
+    allowOwnerListingSubmission: false,
+    ownerIntakeMode: 'none',
+    allowAIAssistant: false,
+    allowBookingEngineEmbed: false,
+    isPopular: false,
+    features: [
+      { title: '2 Listing Properti Aktif', included: true },
+      { title: 'Website Pribadi Instan: proplis.com/nama-anda', included: true },
+      { title: 'Tampilan Mobile & Desktop Responsif', included: true },
+      { title: 'Katalog Rent, Sale & Lease', included: true },
+      { title: 'Pesan Masuk: Direct In-App CRM Inbox messages saja', included: true },
+      { title: 'Privasi Terjaga: Nomor HP & WhatsApp disembunyikan dari publik', included: true },
+      { title: 'Galeri Foto Properti Standar', included: true },
+      { title: '❌ Tanpa Video Tour', included: false, note: 'Eksklusif Agency Elite' },
+      { title: '❌ Tanpa Tracking Pixel (Meta/TikTok/Google)', included: false },
+      { title: '❌ Tanpa AI Assistant Copywriting', included: false }
+    ]
+  };
+
+  const growthPlanId: PlanTranslation = {
+    name: 'Growth',
+    tagline: 'Untuk solo agen yang mengembangkan listing lokal & menjalankan iklan berbayar',
+    priceFormatted: 'Rp 99.000',
+    billingPeriod: '/ bulan',
+    listingLimitLabel: 'Hingga 20 Listing Aktif',
+    listingLimit: 20,
+    allowWhatsApp: true,
+    allowTrackingTags: true,
+    allowVideoPerListing: false,
+    maxVideosPerListing: 0,
+    allowRotatingListings: false,
+    allowOwnerListingSubmission: true,
+    ownerIntakeMode: 'light',
+    allowAIAssistant: true,
+    allowBookingEngineEmbed: false,
+    isPopular: true,
+    badge: 'Paling Populer',
+    features: [
+      { title: 'Hingga 20 Listing Properti Aktif', included: true },
+      { title: 'Semua fitur paket Starter (Free)', included: true },
+      { title: 'Direct Lead Capture: No. telepon publik + tombol 1-Klik Direct WhatsApp', included: true },
+      { title: 'Integrasi Meta Pixel Tag (Facebook & Instagram Ads)', included: true },
+      { title: 'Integrasi TikTok Pixel Tag', included: true },
+      { title: 'Integrasi Google Tag / GA4 Analytics', included: true },
+      { title: 'Dashboard Lead Analytics: Total pengunjung & konversi WhatsApp', included: true },
+      { title: 'Bilingual AI Assistant: Generator deskripsi otomatis & AI Polish', included: true },
+      { title: 'Owner Intake (Light): Formulir cepat titip listing (No HP, 1 foto, deskripsi singkat)', included: true },
+      { title: '❌ Tanpa Video Tour / Embed (Eksklusif Agency Elite)', included: false, note: 'Eksklusif Agency Elite' }
+    ]
+  };
+
+  const elitePlanId: PlanTranslation = {
+    name: 'Agency Elite',
+    tagline: 'Untuk kantor agensi, broker, dan tim volume tinggi yang butuh presentasi & otomasi maksimal',
+    priceFormatted: 'Rp 249.000',
+    billingPeriod: '/ bulan',
+    listingLimitLabel: 'Listing Tanpa Batas (UNLIMITED)',
+    listingLimit: 999999,
+    allowWhatsApp: true,
+    allowTrackingTags: true,
+    allowVideoPerListing: true,
+    maxVideosPerListing: 3,
+    allowRotatingListings: true,
+    allowOwnerListingSubmission: true,
+    ownerIntakeMode: 'complete',
+    allowAIAssistant: true,
+    allowBookingEngineEmbed: true,
+    badge: 'Pilihan Agency & Tim Top',
+    features: [
+      { title: 'UNLIMITED Listing Properti Aktif (Tanpa Batas)', included: true },
+      { title: 'Semua fitur paket Growth', included: true },
+      { title: '🎥 Video Tour Embed: Hingga 3 Video per listing (YouTube, Vimeo, TikTok, IG Reels)', included: true },
+      { title: '🏨 Rental Booking Engine Embed: SiteMinder, Book and Link, Cloudbeds direct widget', included: true },
+      { title: 'Onboarding Pemilik Otomatis Lengkap (Wizard spesifikasi + galeri foto)', included: true },
+      { title: 'Penandatanganan Perjanjian Komisi Digital dengan tanda tangan digital terintegrasi', included: true },
+      { title: 'Routing Deal Instan: 1-klik WhatsApp langsung untuk pemilik dan pembeli', included: true },
+      { title: 'Prioritas Analitik Agency: Analisis mendalam keterlibatan & konversi tim', included: true },
+      { title: 'Banner Hero Showcase Bergerak Otomatis', included: true }
+    ]
+  };
+
+  return {
+    starter: starterPlanId,
+    growth: growthPlanId,
+    elite: elitePlanId,
+    free: starterPlanId,
+    pro: elitePlanId
+  };
+}
